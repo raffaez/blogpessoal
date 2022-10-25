@@ -6,6 +6,7 @@ import { UsuarioModule } from '../usuario/usuario.module';
 import { Bcrypt } from './bcrypt/bcrypt';
 import { jwtConstants } from './constants/constants';
 import { AuthService } from './services/auth.service';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
@@ -17,7 +18,7 @@ import { LocalStrategy } from './strategies/local.strategy';
       signOptions: { expiresIn: '24h' }
     })
   ],
-  providers: [Bcrypt, AuthService, LocalStrategy],
+  providers: [Bcrypt, AuthService, LocalStrategy, JwtStrategy],
   controllers: [],
   exports: [Bcrypt]
 })
