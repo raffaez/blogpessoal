@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
-import { MessagesHelper } from 'src/helpers/messages.helper';
-import { RegExHelper } from 'src/helpers/regex.helper';
-import { Postagem } from 'src/postagem/entities/postagem.entity';
+import { MessagesHelper } from '../../helpers/messages.helper';
+import { RegExHelper } from '../../helpers/regex.helper';
+import { Postagem } from '../../postagem/entities/postagem.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({name: 'tb_usuarios'})
