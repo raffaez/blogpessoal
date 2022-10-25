@@ -21,12 +21,12 @@ import { UsuarioModule } from './usuario/usuario.module';
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
       entities: [Postagem, Tema, Usuario],
-      synchronize: true
+      synchronize: true,
     } as TypeOrmModuleOptions),
     PostagemModule,
     TemaModule,
     AuthModule,
-    UsuarioModule
+    UsuarioModule,
   ],
   controllers: [],
   providers: [],

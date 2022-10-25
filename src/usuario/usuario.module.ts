@@ -12,4 +12,4 @@ import { UsuarioService } from './services/usuario.service';
   controllers: [UsuarioController],
   exports: [UsuarioService],
 })
-export class UsuarioModule{}
+export class UsuarioModule {}

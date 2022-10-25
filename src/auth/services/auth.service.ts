@@ -6,21 +6,25 @@ import { Bcrypt } from '../bcrypt/bcrypt';
 import { UsuarioLogin } from '../entities/usuariologin.entity';
 
 @Injectable()
-export class AuthService{
+export class AuthService {
   constructor(
     private usuarioService: UsuarioService,
     private jwtService: JwtService,
-    private bcrypt: Bcrypt
-  ){}
+    private bcrypt: Bcrypt,
+  ) {}
 
-  async validateUser(username: string, password: string): Promise<any>{
+  async validateUser(username: string, password: string): Promise<any> {
     const buscaUsuario = await this.usuarioService.findByEmail(username);
 
-    if(!buscaUsuario) throw new HttpException('Usuário não encontrado.', HttpStatus.NOT_FOUND);
+    if (!buscaUsuario)
+      throw new HttpException('Usuário não encontrado.', HttpStatus.NOT_FOUND);
 
-    const valida = await this.bcrypt.compararSenhas(buscaUsuario.senha, password);
+    const valida = await this.bcrypt.compararSenhas(
+      buscaUsuario.senha,
+      password,
+    );
 
-    if(buscaUsuario && valida){
+    if (buscaUsuario && valida) {
       // desestruturação: armazena a senha na variável senha e todo o resto na variável result
       const { senha, ...result } = buscaUsuario;
       return result;
@@ -29,14 +33,15 @@ export class AuthService{
     return null;
   }
 
-  async login(usuarioLogin: UsuarioLogin){
-    const payload = { 
+  async login(usuarioLogin: UsuarioLogin) {
+    const payload = {
       sub: 'blogpessoal',
-      username: usuarioLogin.usuario };
+      username: usuarioLogin.usuario,
+    };
 
     return {
       usuario: usuarioLogin.usuario,
-      token: `Bearer ${this.jwtService.sign(payload)}`
-    }
+      token: `Bearer ${this.jwtService.sign(payload)}`,
+    };
   }
 }
