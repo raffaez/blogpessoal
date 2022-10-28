@@ -36,11 +36,11 @@ export class AuthService {
   async login(usuarioLogin: UsuarioLogin) {
     const payload = {
       sub: 'blogpessoal',
-      username: usuarioLogin.usuario,
+      username: usuarioLogin.email,
     };
 
     return {
-      usuario: usuarioLogin.usuario,
+      usuario: usuarioLogin.email,
       token: `Bearer ${this.jwtService.sign(payload)}`,
     };
   }

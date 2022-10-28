@@ -8,32 +8,40 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger/dist';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   public id: number;
 
   @IsNotEmpty()
   @Column({ nullable: false })
+  @ApiProperty()
   public nome: string;
 
   @IsNotEmpty()
   @Column({ nullable: false })
+  @ApiProperty()
   public sobrenome: string;
 
   @IsEmail()
-  @Column()
+  @Column({ nullable: false })
+  @ApiProperty({ example: "email@email.com.br" })
   public email: string;
 
   @IsNotEmpty()
-  @Column()
+  @Column({ nullable: false })
   @Matches(RegExHelper.password, { message: MessagesHelper.PASSWORD_VALID })
+  @ApiProperty()
   public senha: string;
 
   @Column({ length: 5000, default: 'default.jpg' })
+  @ApiProperty()
   public foto: string;
 
+  @ApiProperty()
   @OneToMany(() => Postagem, (postagem) => postagem.usuario)
   postagem: Postagem[];
 }
