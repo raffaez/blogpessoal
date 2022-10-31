@@ -14,16 +14,27 @@ import { UsuarioModule } from './usuario/usuario.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: 'root',
+    //   database: 'db_blogpessoal',
+    //   entities: [Postagem, Tema, Usuario],
+    //   synchronize: true,
+    // }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'db_blogpessoal',
-      entities: [Postagem, Tema, Usuario],
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      logging: false,
+      dropSchema: false,
+      ssl: {
+        rejectUnauthorized: false
+      },
       synchronize: true,
-    } as TypeOrmModuleOptions),
+      autoLoadEntities: true,
+    }),
     PostagemModule,
     TemaModule,
     AuthModule,

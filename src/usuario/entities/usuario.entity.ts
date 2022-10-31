@@ -2,12 +2,7 @@ import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
 import { MessagesHelper } from '../../helpers/messages.helper';
 import { RegExHelper } from '../../helpers/regex.helper';
 import { Postagem } from '../../postagem/entities/postagem.entity';
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger/dist';
 
 @Entity({ name: 'tb_usuarios' })
@@ -28,7 +23,7 @@ export class Usuario {
 
   @IsEmail()
   @Column({ nullable: false })
-  @ApiProperty({ example: "email@email.com.br" })
+  @ApiProperty({ example: 'email@email.com.br' })
   public email: string;
 
   @IsNotEmpty()

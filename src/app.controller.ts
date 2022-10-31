@@ -9,8 +9,8 @@ export class AppController {
   @Get()
   async redirect(
     @Res()
-    resposta: any
-    ){
-      return resposta.redirect('/swagger');
+    resposta: any,
+  ) {
+    return resposta.redirect('/swagger');
   }
 }

@@ -7,12 +7,16 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-  .setTitle('Blog Pessoal')
-  .setDescription('Projeto Blog Pessoal')
-  .setContact('Rafaele Souza', 'http://rafaelesouza.com', 'rafaelessv@gmail.com')
-  .setVersion('1.0')
-  .addBearerAuth()
-  .build();
+    .setTitle('Blog Pessoal')
+    .setDescription('Projeto Blog Pessoal')
+    .setContact(
+      'Rafaele Souza',
+      'http://rafaelesouza.com',
+      'rafaelessv@gmail.com',
+    )
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
 

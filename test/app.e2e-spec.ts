@@ -1,11 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as request from 'supertest';
 
 describe('Testes dos Módulos Usuário de Auth (e2e)', () => {
-
   let token: any;
   let usuarioId: any;
   let app: INestApplication;
@@ -23,8 +21,9 @@ describe('Testes dos Módulos Usuário de Auth (e2e)', () => {
           autoLoadEntities: true,
           synchronize: true,
           logging: false,
-          dropSchema: true
-      })],
+          dropSchema: true,
+        }),
+      ],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -42,9 +41,9 @@ describe('Testes dos Módulos Usuário de Auth (e2e)', () => {
         nome: 'Root',
         sobrenome: 'Root',
         email: 'root@root.com',
-        senha: 'Root@1234'
+        senha: 'Root@1234',
       });
-      expect(201)
+    expect(201);
 
     usuarioId = resposta.body.id;
   });
@@ -54,31 +53,29 @@ describe('Testes dos Módulos Usuário de Auth (e2e)', () => {
       .post('/auth/login')
       .send({
         email: 'root@root.com',
-        senha: 'Root@1234'
-      })
-      expect(200)
+        senha: 'Root@1234',
+      });
+    expect(200);
 
     token = resposta.body.token;
   });
 
   it('03 - Não deve duplicar o usuário', async () => {
-    return request(app.getHttpServer())
-      .post('/usuarios/cadastrar')
-      .send({
-        nome: 'Root',
-        sobrenome: 'Root',
-        email: 'root@root.com',
-        senha: 'Root@1234'
-      })
-      expect(400)
+    return request(app.getHttpServer()).post('/usuarios/cadastrar').send({
+      nome: 'Root',
+      sobrenome: 'Root',
+      email: 'root@root.com',
+      senha: 'Root@1234',
+    });
+    expect(400);
   });
 
   it('04 - Deve listar todos os usuarios', async () => {
     request(app.getHttpServer())
       .get('usuarios/all')
       .set('Authorization', `${token}`)
-      .send({})
-      expect(200)
+      .send({});
+    expect(200);
   });
 
   it('05 - Deve atualizar um usuario', async () => {
@@ -91,12 +88,11 @@ describe('Testes dos Módulos Usuário de Auth (e2e)', () => {
         sobrenome: 'Root',
         email: 'root@root.com',
         senha: 'Root@1234',
-        foto: 'https://i.imgur.com/MxHmulq.jpeg'
+        foto: 'https://i.imgur.com/MxHmulq.jpeg',
       })
-      .then(resposta => {
+      .then((resposta) => {
         expect('Root atualizado').toEqual(resposta.body.nome);
-      })
-      expect(200)
+      });
+    expect(200);
   });
-
 });
